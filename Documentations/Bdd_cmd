@@ -1,0 +1,59 @@
+
+// Démarrer mysql
+sudo /etc/init.d/mysql start
+
+// Status
+sudo /etc/init.d/mysql status
+
+// Arrêter mysql
+sudo /etc/init.d/mysql stop
+
+// Connexion sans mdp
+mysql -u root
+
+// Connexion avec mdp
+mysql -u root -p
+
+// Créer un utilisateur dans la base locale (localhost) :
+
+CREATE user "nom_utilisateur"@"localhost";
+
+// Attribuer un mot de passe à un utilisateur :
+
+SET password FOR "nom_utilisateur"@"localhost" = password("mot_de_passe");
+
+// Modifier un mot de passe d'un utilisateur :
+
+UPDATE user SET password = password("nouveau_mot_de_passe") where user = "nom_utilisateur" and host="localhost";
+
+// Supprimer un utilisateur :
+
+DROP user "nom_utilisateur"@"localhost";
+
+// Donner tous les droits à un utilisateur sur une base de données :
+
+GRANT ALL ON nom_base.* TO "nom_utilisateur"@"localhost";
+
+// Enlever tous les droits à un utilisateur sur une base de données :
+
+REVOKE ALL privileges ON nom_base.* FROM "nom_utilisateur"@"localhost";
+
+// Lister les bases présentes :
+
+SHOW DATABASES;
+
+// Se connecter à une base :
+
+USE nom_base;
+
+// Créer une base :
+
+CREATE DATABASE nom_base;
+
+// Supprimer une base :
+
+DROP DATABASE nom_de_la_base;
+
+
+
+Référence : http://lea-linux.org/documentations/MySQL
