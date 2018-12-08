@@ -1,0 +1,41 @@
+Dead line 05 Janvier 2019
+
+Mini site de gestion de bibliothèque personnelle
+
+Composition
+
+* Page d'accueil
+
+Une page d'accueil qui affichera les détails d'un livre choisi aléatoirement parmi ceux de la table concernée,
+et qui contiendra un bouton servant de lien vers la page d'inscription et un autre vers la page de connexion. cette page devra être responsive.
+
+Questions :
+
+- Quand vous dites "table concernée", vous parlez de la table qui stocke tous les livres ?
+- Donc si je comprends bien sur la page d'accueil on affiche le détail d'un livre de n'importe quel utilisateur ?
+- Un internaute lambda (non inscrit) doit-il pouvoir télécharger le livre précédent ?
+
+
+* Page d'inscription
+
+Une page inscription utilisateur 
+
+(le système devra permettre de gérer en BDD 2 rôles différents: user et admin), composée d'un login et d'un mot de passe
+
+
+* Page de connexion utilisateurs
+
+    => user 
+    
+        # Affichage de la liste des livres saisis
+        # Ajout de livre (titre, auteur, genre, éditeur, description courte)
+        # Edition de livre
+        # Suppression de livre
+        
+    => admin
+    
+        # Affichage de la liste des utilisateurs
+        # Ajouter un utilisateur
+        # Supprimer un utilisateur
+        # Ajouter un livre à la bibliothèque d'un utilisateur
+        # Supprimer un livre de la bibliothèque d'un utilisateur
