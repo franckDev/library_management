@@ -6,7 +6,7 @@ parameters:
     database_user: root
     database_password: Ez1452!g78
     mailer_transport: smtp
-    mailer_host: smtp.gmail.com
-    mailer_user: developpeur16700@gmail.com
-    mailer_password: codeafondpython
+    mailer_host: null
+    mailer_user: null
+    mailer_password: null
     secret: 27e9d4b62f42856a4c90e4746d3592dcc822eafe
