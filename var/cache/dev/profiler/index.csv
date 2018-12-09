@@ -1,6 +1,1 @@
-840659,10.240.0.239,GET,http://library-mangement-franckcdi.c9users.io/web/app_dev.php/,1544042683,,200
-b0ac53,10.240.0.239,GET,http://library-mangement-franckcdi.c9users.io/web/app_dev.php/,1544042769,,200
-281176,10.240.0.227,GET,http://library-mangement-franckcdi.c9users.io/web/app_dev.php/,1544042795,,200
-253725,10.240.0.90,GET,http://library-mangement-franckcdi.c9users.io/web/app_dev.php/,1544042813,,200
-0cff90,10.240.0.87,GET,http://library-management-franckcdi.c9users.io/web/app_dev.php/,1544098817,,200
-2bc642,10.240.0.227,GET,http://library-management-franckcdi.c9users.io/web/app_dev.php/,1544098854,,200
+18040c,::1,GET,http://localhost/library_management/web/app_dev.php/login,1544371168,,200
