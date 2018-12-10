@@ -1,0 +1,6 @@
+general:
+    title:
+        tab: 'Bienvenue !'
+    navbar:
+        connexion: 'Connexion'
+        register: 'Inscription'

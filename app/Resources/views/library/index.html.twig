@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'app' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-9">
+            <div id="middle_card" class="card border-dark mb-3">
+                <div class="card-header">
+                    <iframe src="{{ asset('pdf/test.pdf') }}" style="width: 100%;height: 500px;" ></iframe>
+                </div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Direction de la recherche, des études, de l'évaluation et des statistiques.</h5>
+                    <p class="card-text">Ce dossier décrit la place des organismes privés d’assurances dans la couverture
+                                         maladie en Europe, à travers l’exemple de six pays : la France, l’Allemagne,
+                                         les Pays-Bas, la Suisse, l’Espagne et le Royaume-Uni.Au sein de ces pays existe
+                                         une couverture maladie de base et obligatoire instaurée par les pouvoirs publics.
+                                         Toutefois, en Suisse, aux Pays-Bas et dans une moindre mesure enAllemagne,
+                                         la gestion de cette couverture de base est confiée aux assureurs privés,
+                                         mis en concurrence. Dans l’ensemble des pays étudiés, des organismes privés
+                                         proposent aussi en sus une offre d’assurance maladie facultative qui vient
+                                         améliorer la couverture de base.</p>
+                </div>
+            </div> 
+        </div>
+        <div class="col">
+            <nav class="navbar navbar-light bg-light">
+                <form class="form-inline">
+                    <button id="btn_co" class="btn btn-outline-success" type="button" url="{{ path('fos_user_security_login')}}">{{ 'general.navbar.connexion'|trans }}</button>
+                    <button id="btn_in" class="btn btn-sm btn-outline-secondary" type="button" url="{{ path('fos_user_registration_register')}}">{{ 'general.navbar.register'|trans }}</button>
+                </form>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
