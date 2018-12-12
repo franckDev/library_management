@@ -1,0 +1,17 @@
+
+body{
+	background-color: #e0e0e0;
+}
+
+#form-login{
+	background-color: white;
+	z-index: 1000;
+	margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+	transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+	padding: 30px;
+	-moz-box-shadow: 1px 1px 5px 0px #656565;
+	-webkit-box-shadow: 1px 1px 5px 0px #656565;
+	-o-box-shadow: 1px 1px 5px 0px #656565;
+	box-shadow: 1px 1px 5px 0px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=5);
+}
