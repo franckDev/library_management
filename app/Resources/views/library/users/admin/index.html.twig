@@ -3,94 +3,96 @@
 {% trans_default_domain 'app' %}
 
 {% block stylesheets %}
+        <!-- Style Perso Users CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/users/style.css') }}" />
 {% endblock %}
 
 {% block body %}
 
-    <div class="container">
+    <p id="message"></p>
+
+    <div class="col-xl-10 offset-xl-1 col-lg-12 col-md-12 col-sm-6 col-8">
         
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         
-            <div class="row">
-                
-                <div class="col-sm-10">
-                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}             
-                </div>
-                
-                <div class="col-sm-1">
-                    <a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>             
-                </div>
-        
+            <div class="col-12">
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}   
+            </div>
+            <div class="col-12">
+                <a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>     
             </div>
             
-            <div class="row">
-                <h1>{{ 'general.title.list_user'|trans }}</h1>        
-            </div>
-        
+            <h1>{{ 'general.title.list_user'|trans }}</h1>        
+    
+            <table class="table table-striped table-bordered">
                 
-            <div class="row">
+                <thead>
+                    <tr>
+                        <th>{{ 'general.head.username'|trans }}</th>
+                        <th>{{ 'general.head.role'|trans }}</th>
+                        <th>{{ 'general.head.mail'|trans }}</th>
+                        <th>{{ 'general.head.status'|trans }}</th>
+                        <th>{{ 'general.head.last_login'|trans }}</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
                 
-                <div class="col-sm-12">
-                    <table class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>{{ 'general.head.username'|trans }}</th>
-                                <th>{{ 'general.head.role'|trans }}</th>
-                                <th>{{ 'general.head.mail'|trans }}</th>
-                                <th>{{ 'general.head.status'|trans }}</th>
-                                <th>{{ 'general.head.last_login'|trans }}</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for user in users %}
-                            <tr>
-                                <td>{{ user.username }}</td>
-                                <td>
-                                    {% set role = 'general.body.' ~ user.roles.0 %}
-                                    {{ role|lower|trans  }}
-                                </td>
-                                <td>{{ user.email }}</td>
-                                <td>
-                                    {% if user.enabled == false %}
-                                        {% set etat = 'general.body.statement_0' %}
-                                    {% else %}
-                                        {% set etat = 'general.body.statement_1' %}
-                                    {% endif %}
-                        
-                                    {{ etat|trans }}
-                                </td>
-                                <td>
-                                    {{ user.lastLogin|date('d-m-Y H:i:s') }}
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li>
-                                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                                        </li>
-                                        <li>
-                                            <a id="del_user" name="{{ user.id }}" href="#" >delete</a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                <tbody>
                     
-                </div>
-                  
-            </div>
-                      
-            <div class="row">
-                <a class= "btn btn-primary" href="{{ path('user_new') }}">Create a new user</a>        
-            </div>
+                {% for user in users %}
+                    <tr>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                        <td>
+                            {% set role = 'general.body.' ~ user.roles.0 %}
+                            {{ role|lower|trans  }}
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                        <td>
+                            {% if user.enabled == false %}
+                                {% set etat = 'general.body.statement_0' %}
+                            {% else %}
+                                {% set etat = 'general.body.statement_1' %}
+                            {% endif %}
+                
+                            {{ etat|trans }}
+                        </td>
+                        <td>
+                            {{ user.lastLogin|date('d-m-Y H:i:s') }}
+                        </td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a id="edit_user" href="{{ path('user_edit', { 'id': user.id }) }}">
+                                        <img></img>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="del_user" href="#" name="{{ user.id }}">
+                                        <img></img>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                
+                </tbody>
+                
+            </table>
+            <p>
+                <a class= "btn btn-primary" href="{{ path('user_new') }}">{{ 'general.button.new'|trans }}</a>   
+            </p>                             
+
         
-        {% endif %}
+    
+        {% endif %}  
         
     </div>
-
+        
 {% endblock %} 
 
 {% block javascripts %}

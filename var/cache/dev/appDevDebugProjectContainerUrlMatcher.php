@@ -122,6 +122,11 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
         }
         not_homepage:
 
+        // user_new
+        if ('/new' === $pathinfo) {
+            return array (  '_controller' => 'AppBundle\\Controller\\ApplicationController::newAction',  '_route' => 'user_new',);
+        }
+
         // user_edit
         if (preg_match('#^/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_edit')), array (  '_controller' => 'AppBundle\\Controller\\ApplicationController::editAction',));
@@ -147,11 +152,6 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 return $ret;
             }
             not_user_index:
-
-            // user_new
-            if ('/user/new' === $pathinfo) {
-                return array (  '_controller' => 'AppBundle\\Controller\\UserController::newAction',  '_route' => 'user_new',);
-            }
 
         }
 

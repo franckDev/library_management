@@ -302,6 +302,8 @@ the Team.
     'general.title.tab' => 'Welcome !',
     'general.title.list_book' => 'Books list',
     'general.title.list_user' => 'Users list',
+    'general.title.create_user' => 'Creating a new user',
+    'general.title.edit_user' => 'Editing user information',
     'general.head.username' => 'Username',
     'general.head.role' => 'Role',
     'general.head.mail' => 'Mail address',
@@ -313,6 +315,9 @@ the Team.
     'general.body.statement_0' => 'Inactive',
     'general.button.connexion' => 'Connection',
     'general.button.register' => 'Registration',
+    'general.button.save' => 'Save',
+    'general.button.cancel' => 'Cancel',
+    'general.button.new' => 'New user',
     'general.footer.message' => '© 2018 Exercise style agency - Legal Notice - Sitemap',
   ),
 ));

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'app' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/login/style.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    <div id="form-login" class="col-xl-4 offset-xl-4 col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1">
+        
+        <h5>{{ 'general.title.edit_user'|trans }}</h5>
+        
+    	{{ form_start(edit_form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    
+    		<div class="form-group">
+    			{{ form_label(edit_form.username) }}
+    			{{ form_widget(edit_form.username, { 'attr': {'class': 'form-control'} }) }}
+    			<small class="text-danger">
+    	            {{ form_errors(edit_form.username) }}
+    	        </small> 
+    		</div>
+    
+    		<div class="form-group">
+    			{{ form_label(edit_form.plainPassword.first) }}
+    			{{ form_widget(edit_form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+    			<small class="text-danger">
+    				{{ form_errors(edit_form.plainPassword.first) }}
+    			</small>
+    		</div>
+    
+    		<div class="form-group">
+    			{{ form_label(edit_form.plainPassword.second) }}
+    			{{ form_widget(edit_form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+    			<small class="text-danger">
+    				{{ form_errors(edit_form.plainPassword.second) }}
+    			</small>
+    		</div>
+    
+    		<div class="form-group">
+    			{{ form_label(edit_form.email) }}
+    			{{ form_widget(edit_form.email, { 'attr': {'class': 'form-control'} }) }}
+    			<small class="text-danger">
+    				{{ form_errors(edit_form.email) }}
+    			</small>
+    		</div>
+    		
+    		<div class="form-check">
+    			{{ form_widget(edit_form.enabled, { 'attr': {'class': 'form-check-input'} }) }}
+    			{{ form_label(edit_form.enabled) }}
+    			<small class="text-danger">
+    				{{ form_errors(edit_form.enabled) }}
+    			</small>
+    		</div>
+    
+    	    <div class="col">
+    	        <input type="submit" class="btn btn-primary" value="{{ 'general.button.save'|trans }}" />
+    	        <a class="btn btn-secondary" href="{{ path('users') }}">{{ 'general.button.cancel'|trans }}</a>
+    	    </div>
+    
+    	{{ form_end(edit_form) }}
+    
+    </div>
+    
+{% endblock %}

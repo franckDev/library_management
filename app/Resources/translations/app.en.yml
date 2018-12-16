@@ -3,6 +3,8 @@ general:
         tab: 'Welcome !'
         list_book: 'Books list'
         list_user: 'Users list'
+        create_user: 'Creating a new user'
+        edit_user: 'Editing user information'
     head:
         username: 'Username'
         role: 'Role'
@@ -17,5 +19,8 @@ general:
     button:
         connexion: 'Connection'
         register: 'Registration'
+        save: 'Save'
+        cancel: 'Cancel'
+        new: 'New user'
     footer:
         message: '© 2018 Exercise style agency - Legal Notice - Sitemap'

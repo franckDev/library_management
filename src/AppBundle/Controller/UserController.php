@@ -33,31 +33,32 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * Creates a new user entity.
-     *
-     * @Route("/new", name="user_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $user = new User();
-        $form = $this->createForm('AppBundle\Form\UserType', $user);
-        $form->handleRequest($request);
+    // /**
+    //  * Creates a new user entity.
+    //  *
+    //  * @Route("/new", name="user_new")
+    //  * @Method({"GET", "POST"})
+    //  */
+    // public function newAction(Request $request)
+    // {
+    //     var_dump("coucou");die();
+    //     $user = new User();
+    //     $form = $this->createForm('AppBundle\Form\UserType', $user);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $em = $this->getDoctrine()->getManager();
+    //         $em->persist($user);
+    //         $em->flush();
 
-            return $this->redirectToRoute('users', array('id' => $user->getId()));
-        }
+    //         return $this->redirectToRoute('users', array('id' => $user->getId()));
+    //     }
 
-        return $this->render('user/new.html.twig', array(
-            'user' => $user,
-            'form' => $form->createView(),
-        ));
-    }
+    //     return $this->render('user/new.html.twig', array(
+    //         'user' => $user,
+    //         'form' => $form->createView(),
+    //     ));
+    // }
 
     /**
      * Creates a form to delete a user entity.

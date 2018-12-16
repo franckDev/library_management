@@ -27,6 +27,30 @@ class ApplicationController extends Controller
     }
     
     /**
+     * @Route("/new", name="user_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\UserType', $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('users', array('id' => $user->getId()));
+        }
+
+        return $this->render('library/users/user/new.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+    
+    /**
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      */
@@ -44,7 +68,7 @@ class ApplicationController extends Controller
             return $this->redirectToRoute('users');
         }
 
-        return $this->render('user/edit.html.twig', array(
+        return $this->render('library/users/user/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
         ));
