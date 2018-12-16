@@ -1,3 +1,21 @@
 general:
     title:
         tab: 'Welcome !'
+        list_book: 'Books list'
+        list_user: 'Users list'
+    head:
+        username: 'Username'
+        role: 'Role'
+        mail: 'Mail address'
+        status: 'Account statement'
+        last_login: 'Last connection'
+    body:
+        role_admin: 'Aministrator'
+        role_user: 'User'
+        statement_1: 'Active'
+        statement_0: 'Inactive'
+    button:
+        connexion: 'Connection'
+        register: 'Registration'
+    footer:
+        message: '© 2018 Exercise style agency - Legal Notice - Sitemap'

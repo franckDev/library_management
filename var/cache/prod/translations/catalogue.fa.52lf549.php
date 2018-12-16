@@ -375,6 +375,20 @@ the Team.
   'app' => 
   array (
     'general.title.tab' => 'Welcome !',
+    'general.title.list_book' => 'Books list',
+    'general.title.list_user' => 'Users list',
+    'general.head.username' => 'Username',
+    'general.head.role' => 'Role',
+    'general.head.mail' => 'Mail address',
+    'general.head.status' => 'Account statement',
+    'general.head.last_login' => 'Last connection',
+    'general.body.role_admin' => 'Aministrator',
+    'general.body.role_user' => 'User',
+    'general.body.statement_1' => 'Active',
+    'general.body.statement_0' => 'Inactive',
+    'general.button.connexion' => 'Connection',
+    'general.button.register' => 'Registration',
+    'general.footer.message' => '© 2018 Exercise style agency - Legal Notice - Sitemap',
   ),
 ));
 $catalogue->addFallbackCatalogue($catalogueEn);

@@ -1,6 +1,21 @@
 general:
     title:
         tab: 'Bienvenue !'
-    navbar:
+        list_book: 'Liste des livres'
+        list_user: 'Liste des utilisateurs'
+    head:
+        username: 'Nom d''utilisateur'
+        role: 'Role'
+        mail: 'Adresse mail'
+        status: 'Etat du compte'
+        last_login: 'Dernière connexion'
+    body:
+        role_admin: 'Aministrateur'
+        role_user: 'Utilisateur'
+        statement_1: 'Actif'
+        statement_0: 'Inactif'
+    button:
         connexion: 'Connexion'
         register: 'Inscription'
+    footer:
+        message: '© 2018 Exercise style agency - Mentions légales - Plan du site'

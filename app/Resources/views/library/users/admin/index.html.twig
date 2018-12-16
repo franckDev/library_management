@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'app' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/users/style.css') }}" />
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        
+            <div class="row">
+                
+                <div class="col-sm-10">
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}             
+                </div>
+                
+                <div class="col-sm-1">
+                    <a href="{{ path('fos_user_security_logout') }}"> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>             
+                </div>
+        
+            </div>
+            
+            <div class="row">
+                <h1>{{ 'general.title.list_user'|trans }}</h1>        
+            </div>
+        
+                
+            <div class="row">
+                
+                <div class="col-sm-12">
+                    <table class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>{{ 'general.head.username'|trans }}</th>
+                                <th>{{ 'general.head.role'|trans }}</th>
+                                <th>{{ 'general.head.mail'|trans }}</th>
+                                <th>{{ 'general.head.status'|trans }}</th>
+                                <th>{{ 'general.head.last_login'|trans }}</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>
+                                    {% set role = 'general.body.' ~ user.roles.0 %}
+                                    {{ role|lower|trans  }}
+                                </td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if user.enabled == false %}
+                                        {% set etat = 'general.body.statement_0' %}
+                                    {% else %}
+                                        {% set etat = 'general.body.statement_1' %}
+                                    {% endif %}
+                        
+                                    {{ etat|trans }}
+                                </td>
+                                <td>
+                                    {{ user.lastLogin|date('d-m-Y H:i:s') }}
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                                        </li>
+                                        <li>
+                                            <a id="del_user" name="{{ user.id }}" href="#" >delete</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                </div>
+                  
+            </div>
+                      
+            <div class="row">
+                <a class= "btn btn-primary" href="{{ path('user_new') }}">Create a new user</a>        
+            </div>
+        
+        {% endif %}
+        
+    </div>
+
+{% endblock %} 
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        // Suppression d'un utilisateur
+        $('a#del_user').click(function(event) {
+            
+            // On bloque le comportement du bouton
+            event.preventDefault();
+    
+            // Message de confirmation
+            var test = confirm("Etes vous sur de vouloir supprimer cet utilisateur ?");
+    
+            if(test){
+                
+                // On récupère l'id de l'utilisateur
+                var id = $(this).attr('name');
+                
+               var urlT = '{{ path("delete_user", { 'id': 'idE'}) }}';
+                
+                urlT = urlT.replace("idE", id);
+              
+                $.ajax({
+                    
+                    url: urlT,  // On renseigne l'url TWIG
+                    method: "post",
+                    data: {id: id} // On passe l'id dans la requête
+                    
+                }).done(function(msg){
+                    
+                    console.log(msg.msg);
+                    
+                    // Suppression de la ligne en cause
+                    $('a[name="'+id+'"]').parents('tr').hide();
+                }); 
+                
+            }
+           
+        });
+        
+    
+    </script> 
+
+{% endblock %}

@@ -193,8 +193,20 @@ L\'équipe
   'app' => 
   array (
     'general.title.tab' => 'Bienvenue !',
-    'general.navbar.connexion' => 'Connexion',
-    'general.navbar.register' => 'Inscription',
+    'general.title.list_book' => 'Liste des livres',
+    'general.title.list_user' => 'Liste des utilisateurs',
+    'general.head.username' => 'Nom d\'utilisateur',
+    'general.head.role' => 'Role',
+    'general.head.mail' => 'Adresse mail',
+    'general.head.status' => 'Etat du compte',
+    'general.head.last_login' => 'Dernière connexion',
+    'general.body.role_admin' => 'Aministrateur',
+    'general.body.role_user' => 'Utilisateur',
+    'general.body.statement_1' => 'Actif',
+    'general.body.statement_0' => 'Inactif',
+    'general.button.connexion' => 'Connexion',
+    'general.button.register' => 'Inscription',
+    'general.footer.message' => '© 2018 Exercise style agency - Mentions légales - Plan du site',
   ),
 ));
 
@@ -391,6 +403,20 @@ the Team.
   'app' => 
   array (
     'general.title.tab' => 'Welcome !',
+    'general.title.list_book' => 'Books list',
+    'general.title.list_user' => 'Users list',
+    'general.head.username' => 'Username',
+    'general.head.role' => 'Role',
+    'general.head.mail' => 'Mail address',
+    'general.head.status' => 'Account statement',
+    'general.head.last_login' => 'Last connection',
+    'general.body.role_admin' => 'Aministrator',
+    'general.body.role_user' => 'User',
+    'general.body.statement_1' => 'Active',
+    'general.body.statement_0' => 'Inactive',
+    'general.button.connexion' => 'Connection',
+    'general.button.register' => 'Registration',
+    'general.footer.message' => '© 2018 Exercise style agency - Legal Notice - Sitemap',
   ),
 ));
 $catalogue->addFallbackCatalogue($catalogueEn);

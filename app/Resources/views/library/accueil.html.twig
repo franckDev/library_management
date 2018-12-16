@@ -3,11 +3,10 @@
 {% trans_default_domain 'app' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/accueil/style.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/accueil/style.css') }}" />
 {% endblock %}
 
 {% block body %}
-
 
     <div class="col-12">
         <div id="middle_card" class="card border-dark mb-3">
@@ -31,11 +30,46 @@
     <div class="col">
         <nav class="navbar navbar-light bg-light">
             <form class="form-inline">
-                <button id="btn_co" class="btn btn-outline-success" type="button" url="{{ path('fos_user_security_login')}}">{{ 'general.navbar.connexion'|trans }}</button>
-                <button id="btn_in" class="btn btn-sm btn-outline-secondary" type="button" url="{{ path('fos_user_registration_register')}}">{{ 'general.navbar.register'|trans }}</button>
+                <button id="btn_co" class="btn btn-outline-success" type="button" url="{{ path('fos_user_security_login')}}">{{ 'general.button.connexion'|trans }}</button>
+                <button id="btn_in" class="btn btn-sm btn-outline-secondary" type="button" url="{{ path('fos_user_registration_register')}}">{{ 'general.button.register'|trans }}</button>
             </form>
         </nav>
     </div>
+        
+{% endblock %}
 
+{% block javascripts %}
 
+    <script>
+    
+        $("button").mouseover(function(){
+           
+           var id = $(this).attr("id");
+           
+           if(id == "btn_co"){
+               
+               $(this).prop("class", "btn btn-outline-success");
+               $("#btn_in").prop("class", "btn btn-sm btn-outline-secondary");
+           }
+           
+            if(id == "btn_in"){
+               
+               $(this).prop("class", "btn btn-outline-success");
+               $("#btn_co").prop("class", "btn btn-sm btn-outline-secondary");
+           }
+           
+        });
+        
+        $("#btn_co").mouseout(function(){
+            
+            $("#btn_in").mouseout(function(){
+            
+                $("#btn_co").prop("class", "btn btn-outline-success");
+                $("#btn_in").prop("class", "btn btn-sm btn-outline-secondary");
+            });
+            
+        });
+        
+    </script>
+    
 {% endblock %}

@@ -1,0 +1,10 @@
+div{
+    margin: 10px 10px 10px 10px;
+}
+
+#footer{
+    margin: 0px;
+    padding: 0.6em 0;
+    background: #000000ba;
+    color: white;
+}

@@ -16,8 +16,13 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                default_target_path: /users
                 # if you are using Symfony < 2.8, use the following config instead:
                 # csrf_provider: form.csrf_provider
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 60 # 1 min in seconds
+                path:   /users
 
             logout:       true
             anonymous:    true
@@ -26,4 +31,5 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/users/admin, role: ROLE_ADMIN }
+        - { path: ^/users/user, role: ROLE_USER }

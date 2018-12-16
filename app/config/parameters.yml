@@ -4,7 +4,7 @@ parameters:
     database_port: null
     database_name: symfony
     database_user: root
-    database_password: Ez1452!g78
+    database_password: root
     mailer_transport: smtp
     mailer_host: smtp.laposte.net
     mailer_user: f.durand376@laposte.net

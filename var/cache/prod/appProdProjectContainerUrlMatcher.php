@@ -43,7 +43,83 @@ class appProdProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\R
         }
         not_homepage:
 
-        if (0 === strpos($pathinfo, '/login')) {
+        // user_edit
+        if (preg_match('#^/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_edit')), array (  '_controller' => 'AppBundle\\Controller\\ApplicationController::editAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/user')) {
+            // users
+            if ('/users' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\ApplicationController::userAction',  '_route' => 'users',);
+            }
+
+            // user_index
+            if ('/user' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'AppBundle\\Controller\\UserController::indexAction',  '_route' => 'user_index',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_user_index;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'user_index'));
+                }
+
+                return $ret;
+            }
+            not_user_index:
+
+            // user_new
+            if ('/user/new' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\UserController::newAction',  '_route' => 'user_new',);
+            }
+
+        }
+
+        // delete_user
+        if (0 === strpos($pathinfo, '/delete') && preg_match('#^/delete/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'delete_user')), array (  '_controller' => 'AppBundle\\Controller\\ApplicationController::deleteAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/book')) {
+            // book_index
+            if ('/book' === $trimmedPathinfo) {
+                $ret = array (  '_controller' => 'AppBundle\\Controller\\BookController::indexAction',  '_route' => 'book_index',);
+                if ('/' === substr($pathinfo, -1)) {
+                    // no-op
+                } elseif ('GET' !== $canonicalMethod) {
+                    goto not_book_index;
+                } else {
+                    return array_replace($ret, $this->redirect($rawPathinfo.'/', 'book_index'));
+                }
+
+                return $ret;
+            }
+            not_book_index:
+
+            // book_new
+            if ('/book/new' === $pathinfo) {
+                return array (  '_controller' => 'AppBundle\\Controller\\BookController::newAction',  '_route' => 'book_new',);
+            }
+
+            // book_show
+            if (preg_match('#^/book/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'book_show')), array (  '_controller' => 'AppBundle\\Controller\\BookController::showAction',));
+            }
+
+            // book_edit
+            if (preg_match('#^/book/(?P<id>[^/]++)/edit$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'book_edit')), array (  '_controller' => 'AppBundle\\Controller\\BookController::editAction',));
+            }
+
+            // book_delete
+            if (preg_match('#^/book/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'book_delete')), array (  '_controller' => 'AppBundle\\Controller\\BookController::deleteAction',));
+            }
+
+        }
+
+        elseif (0 === strpos($pathinfo, '/login')) {
             // fos_user_security_login
             if ('/login' === $pathinfo) {
                 $ret = array (  '_controller' => 'fos_user.security.controller:loginAction',  '_route' => 'fos_user_security_login',);

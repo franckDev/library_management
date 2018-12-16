@@ -22,6 +22,16 @@ Une page inscription utilisateur
 
 (le système devra permettre de gérer en BDD 2 rôles différents: user et admin), composée d'un login et d'un mot de passe
 
+Rôle par défaut "USER"
+
+**passer en ADMIN  :
+
+- php bin/console fos:user:promote user ROLE_ADMIN
+
+**re passer en USER :
+
+- php bin/console fos:user:demote user ROLE_ADMIN
+
 
 * Page de connexion utilisateurs
 
