@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Book;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -108,14 +109,40 @@ class BookController extends Controller
     {
         $form = $this->createDeleteForm($book);
         $form->handleRequest($request);
+        
+        // Si on reçoit une requête Ajax
+        if($request->isXMLHttpRequest())
+        {
+            // On récupère l'id du livre à supprimer
+            $id = $request->get('id');
+            
+            // Puis on le renvoie dans un tableau en Json
+            return new JsonResponse(array('msg' => json_encode($id, JSON_UNESCAPED_UNICODE)));
+            
+        //     if($id != "")
+        //     {
+        //         $em = $this->getDoctrine()->getManager();
+                
+        //         // On récupére les infos du livre
+        //         $user = $em->getRepository('AppBundle:Book')->find($id);
+                
+        //         // On le supprime
+        //         $em->remove($user);
+                
+        //         $em->flush();
+                
+        //         $message = "Suppression effectuée avec succès !";
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($book);
-            $em->flush();
+        //     }else{
+                
+        //         $message = "Impossible de récupérer l'identifiant du livre à supprimer !";
+                
+        //     }
+
         }
 
-        return $this->redirectToRoute('book_index');
+        // // Puis on le renvoie dans un tableau en Json
+        // return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
     }
 
     /**

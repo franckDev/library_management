@@ -88,12 +88,12 @@ class ApplicationController extends Controller
         // Role de l'utilisateur
         $role = $this->getUser()->getRoles()[0];
         
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('AppBundle:User')->findAll();
  
         if($role == "ROLE_ADMIN")
         {
+            $em = $this->getDoctrine()->getManager();
+
+            $users = $em->getRepository('AppBundle:User')->findAll();
             
             // Page d'accueil de l'administrateur
             return $this->render('library/users/admin/index.html.twig', array(
@@ -104,17 +104,22 @@ class ApplicationController extends Controller
         elseif($role == "ROLE_USER")
         {
             
+            // Utilisateur
+            $user = $this->getUser();
+
+            $books = $user->getBooks();
+            
             // Page d'accueil de l'utilisateur lambda
-            return $this->render('library/users/user/index.html.twig', [
-                'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            ]); 
+            return $this->render('library/users/user/index.html.twig', array(
+                'books' => $books,
+            ));
             
         }
     }
     
     
     /**
-     * @Route("/delete/{id}", name="delete_user")
+     * @Route("/delete/{id}", name="user_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, User $user)

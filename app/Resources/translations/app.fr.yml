@@ -11,6 +11,12 @@ general:
         mail: 'Adresse mail'
         status: 'Etat du compte'
         last_login: 'Dernière connexion'
+        title: 'Titre'
+        author: 'Auteur'
+        kind: 'Genre'
+        editor: 'Editeur'
+        short_description: 'Description courte'
+        action: 'Actions'
     body:
         role_admin: 'Aministrateur'
         role_user: 'Utilisateur'
@@ -22,5 +28,6 @@ general:
         save: 'Enregistrer'
         cancel: 'Annuler'
         new: 'Nouvel utilisateur'
+        new_book: 'Nouveau livre'
     footer:
         message: '© 2018 Exercise style agency - Mentions légales - Plan du site'

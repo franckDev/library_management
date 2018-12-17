@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BookType extends AbstractType
 {
@@ -19,12 +20,8 @@ class BookType extends AbstractType
             ->add('author')
             ->add('kind')
             ->add('editor')
-            ->add('shortDescription')
-            ->add('encryptName', FileType::class, array('label' => 'Book',
-                                                    'data_class' => null,
-                                                    'attr' => array('data-preview-file-type' => 'text',
-                                                                    'id' => 'input-id')
-                                                    ));
+            ->add('shortDescription', TextareaType::class)
+            ->add('encryptName', FileType::class, array('data_class' => null));
     }/**
      * {@inheritdoc}
      */

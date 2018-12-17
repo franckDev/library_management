@@ -12,7 +12,7 @@
     
     <h5>{{ 'general.title.create_user'|trans }}</h5>
     
-	{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+	{{ form_start(form, {'method': 'post', 'action': path('user_new'), 'attr': {'class': 'user_new'}}) }}
 
 		<div class="form-group">
 			{{ form_label(form.username) }}

@@ -65,14 +65,18 @@
                         </td>
                         <td>
                             <ul>
-                                <li>
+                                <li class="un_list">
                                     <a id="edit_user" href="{{ path('user_edit', { 'id': user.id }) }}">
-                                        <img></img>
+                                        {% image '@AppBundle/Resources/public/images/edit.jpg' %}
+                                            <img src="{{ asset_url }}" width="20" height="20" alt="Edit" />
+                                        {% endimage %}
                                     </a>
                                 </li>
-                                <li>
+                                <li class="un_list">
                                     <a id="del_user" href="#" name="{{ user.id }}">
-                                        <img></img>
+                                        {% image '@AppBundle/Resources/public/images/trash.jpg' %}
+                                            <img src="{{ asset_url }}" width="20" height="20" alt="Delete" />
+                                        {% endimage %}
                                     </a>
                                 </li>
                             </ul>
@@ -86,8 +90,6 @@
             <p>
                 <a class= "btn btn-primary" href="{{ path('user_new') }}">{{ 'general.button.new'|trans }}</a>   
             </p>                             
-
-        
     
         {% endif %}  
         
@@ -113,14 +115,14 @@
                 // On récupère l'id de l'utilisateur
                 var id = $(this).attr('name');
                 
-               var urlT = '{{ path("delete_user", { 'id': 'idE'}) }}';
+               var urlT = '{{ path("user_delete", { 'id': 'idE'}) }}';
                 
                 urlT = urlT.replace("idE", id);
               
                 $.ajax({
                     
                     url: urlT,  // On renseigne l'url TWIG
-                    method: "post",
+                    method: "delete",
                     data: {id: id} // On passe l'id dans la requête
                     
                 }).done(function(msg){

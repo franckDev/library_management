@@ -32,10 +32,6 @@
 }
 
 
-/*ul #edit_user{*/
-/*    background-image: url("../../icone/edit.png");*/
-/*}*/
-
-/*ul #del_user{*/
-/*    background-image: url("../../icone/trash.ico");*/
-/*}*/
+.un_list{
+    list-style-type: none; 
+}

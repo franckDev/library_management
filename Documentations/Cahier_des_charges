@@ -37,15 +37,15 @@ Rôle par défaut "USER"
 
     => user 
     
-        # Affichage de la liste des livres saisis
+        # Affichage de la liste des livres saisis OK
         # Ajout de livre (titre, auteur, genre, éditeur, description courte)
         # Edition de livre
         # Suppression de livre
         
     => admin
     
-        # Affichage de la liste des utilisateurs
-        # Ajouter un utilisateur
-        # Supprimer un utilisateur
+        # Affichage de la liste des utilisateurs OK
+        # Ajouter un utilisateur OK
+        # Supprimer un utilisateur OK 
         # Ajouter un livre à la bibliothèque d'un utilisateur
         # Supprimer un livre de la bibliothèque d'un utilisateur

@@ -20,6 +20,12 @@ class Book
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="books")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * @var string
@@ -191,7 +197,10 @@ class Book
      */
     public function getShortDescription()
     {
-        return $this->shortDescription;
+        if ($this->shortDescription <> null)
+            return stream_get_contents($this->shortDescription);
+        else
+            return $this->shortDescription;
     }
 
     /**
@@ -217,5 +226,30 @@ class Book
     {
         return $this->encryptName;
     }
+    
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Book
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+    
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
 }
 
