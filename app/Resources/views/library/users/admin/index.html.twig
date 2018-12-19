@@ -66,14 +66,21 @@
                         <td>
                             <ul>
                                 <li class="un_list">
-                                    <a id="edit_user" href="{{ path('user_edit', { 'id': user.id }) }}">
+                                    <a id="book_user" href="{{ path('book_show', { 'id': user.id }) }}" title="Accéder à ses livres">
+                                        {% image '@AppBundle/Resources/public/images/livre.png' %}
+                                            <img src="{{ asset_url }}" width="20" height="20" alt="Show"/>
+                                        {% endimage %}
+                                    </a>
+                                </li>
+                                <li class="un_list">
+                                    <a id="edit_user" href="{{ path('user_edit', { 'id': user.id }) }}" title="Modifier son profil">
                                         {% image '@AppBundle/Resources/public/images/edit.jpg' %}
                                             <img src="{{ asset_url }}" width="20" height="20" alt="Edit" />
                                         {% endimage %}
                                     </a>
                                 </li>
                                 <li class="un_list">
-                                    <a id="del_user" href="#" name="{{ user.id }}">
+                                    <a id="del_user" href="#" name="{{ user.id }}" title="Supprimer son profil">
                                         {% image '@AppBundle/Resources/public/images/trash.jpg' %}
                                             <img src="{{ asset_url }}" width="20" height="20" alt="Delete" />
                                         {% endimage %}
@@ -108,7 +115,7 @@
             event.preventDefault();
     
             // Message de confirmation
-            var test = confirm("Etes vous sur de vouloir supprimer cet utilisateur ?");
+            var test = confirm("Etes vous sur de vouloir supprimer cet utilisateur ? Attention la suppression d'un utilisateur entraine également la suppression des tous ses livres.");
     
             if(test){
                 
@@ -127,7 +134,7 @@
                     
                 }).done(function(msg){
                     
-                    console.log(msg.msg);
+                    alert(msg.msg);
                     
                     // Suppression de la ligne en cause
                     $('a[name="'+id+'"]').parents('tr').hide();

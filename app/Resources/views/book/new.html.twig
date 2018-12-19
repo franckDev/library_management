@@ -1,16 +1,86 @@
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'app' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/login/style.css') }}" />
+{% endblock %}
+
 {% block body %}
-    <h1>Book creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+<div id="form-login" class="col-xl-4 offset-xl-4 col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1">
+    
+    <h5>{{ 'general.title.create_book'|trans }}</h5>
+    
+	{{ form_start(form, {'method': 'post', 'action': path('book_new'), 'attr': {'class': 'book_new'}}) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('book_index') }}">Back to the list</a>
-        </li>
-    </ul>
+		<div class="form-group">
+			{{ form_label(form.title) }}
+			{{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+			<small class="text-danger">
+	            {{ form_errors(form.title) }}
+	        </small> 
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.author) }}
+			{{ form_widget(form.author, { 'attr': {'class': 'form-control'} }) }}
+			<small class="text-danger">
+				{{ form_errors(form.author) }}
+			</small>
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.kind) }}
+			{{ form_widget(form.kind, { 'attr': {'class': 'form-control'} }) }}
+			<small class="text-danger">
+				{{ form_errors(form.kind) }}
+			</small>
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.editor) }}
+			{{ form_widget(form.editor, { 'attr': {'class': 'form-control'} }) }}
+			<small class="text-danger">
+				{{ form_errors(form.editor) }}
+			</small>
+		</div>
+		
+		<div class="form-group">
+		    {{ form_label(form.shortDescription) }}
+			{{ form_widget(form.shortDescription, { 'attr': {'class': 'form-control'} }) }}
+			<small class="text-danger">
+				{{ form_errors(form.shortDescription) }}
+			</small>
+		</div>
+		
+		<div class="form-group">
+			{{ form_widget(form.encryptName, { 'attr': {'class': 'form-control'} }) }}
+			<small class="text-danger">
+				{{ form_errors(form.encryptName) }}
+			</small>
+		</div>
+
+	    <div class="col">
+	        <input type="submit" class="btn btn-primary" value="{{ 'general.button.save'|trans }}" />
+	        <a class="btn btn-secondary" href="{{ path('users') }}">{{ 'general.button.cancel'|trans }}</a>
+	    </div>
+
+	{{ form_end(form) }}
+
+</div>
+
+
+
+    {#{{ form_start(form) }}#}
+    {#    {{ form_widget(form) }}#}
+    {#    <input type="submit" value="Create" />#}
+    {#{{ form_end(form) }}#}
+
+    {#<ul>#}
+    {#    <li>#}
+    {#        <a href="{{ path('book_index') }}">Back to the list</a>#}
+    {#    </li>#}
+    {#</ul>#}
+    
 {% endblock %}

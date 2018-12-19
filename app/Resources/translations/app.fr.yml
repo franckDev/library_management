@@ -2,6 +2,7 @@ general:
     title:
         tab: 'Bienvenue !'
         list_book: 'Liste des livres'
+        create_book: 'Création d''un livre'
         list_user: 'Liste des utilisateurs'
         create_user: 'Création d''un nouvel utilisateur'
         edit_user: 'Modification des informations utilisateur'

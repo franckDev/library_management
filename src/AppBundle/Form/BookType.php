@@ -16,12 +16,12 @@ class BookType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('author')
-            ->add('kind')
-            ->add('editor')
-            ->add('shortDescription', TextareaType::class)
-            ->add('encryptName', FileType::class, array('data_class' => null));
+            ->add('title', null, array('label' => 'general.head.title', 'translation_domain' => 'app'))
+            ->add('author', null, array('label' => 'general.head.author', 'translation_domain' => 'app'))
+            ->add('kind', null, array('label' => 'general.head.kind', 'translation_domain' => 'app'))
+            ->add('editor', null, array('label' => 'general.head.editor', 'translation_domain' => 'app'))
+            ->add('shortDescription', TextareaType::class, array('label' => 'general.head.short_description', 'translation_domain' => 'app'))
+            ->add('encryptName', FileType::class);
     }/**
      * {@inheritdoc}
      */

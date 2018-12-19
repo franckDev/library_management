@@ -77,44 +77,46 @@
 {% block javascripts %}
 
     <script type="text/javascript">
+    
+        $(document).ready(function(){
 
-        // Suppression d'un livre
-        $('a#del_book').click(function(event) {
-            
-            // On bloque le comportement du bouton
-            event.preventDefault();
-    
-            // Message de confirmation
-            var test = confirm("Etes vous sur de vouloir supprimer ce livre ?");
-    
-            if(test){
+            // Suppression d'un livre
+            $('a#del_book').click(function(event) {
                 
-                // On récupère l'id du livre
-                var id = $(this).attr('name');
-                
-               var urlT = '{{ path("book_delete", { 'id': 'idE'}) }}';
-                
-                urlT = urlT.replace("idE", id);
-              
-                $.ajax({
-                    
-                    url: urlT,  // On renseigne l'url TWIG
-                    method: "delete",
-                    data: {id: id} // On passe l'id dans la requête
-                    
-                }).done(function(msg){
-                    
-                    console.log(msg.msg);
-                    
-                    // Suppression de la ligne en cause
-                    $('a[name="'+id+'"]').parents('tr').hide();
-                }); 
-                
-            }
-           
-        });
+                // On bloque le comportement du bouton
+                event.preventDefault();
         
-    
+                // Message de confirmation
+                var test = confirm("Etes vous sur de vouloir supprimer ce livre ?");
+        
+                if(test){
+                    
+                    // On récupère l'id du livre
+                    var id = $(this).attr('name');
+                    
+                   var urlT = '{{ path("book_delete", { 'id': 'idE'}) }}';
+                    
+                    urlT = urlT.replace("idE", id);
+                  
+                    $.ajax({
+                        
+                        url: urlT,  // On renseigne l'url TWIG
+                        method: "delete",
+                        data: {id: id} // On passe l'id dans la requête
+                        
+                    }).done(function(msg){
+                        
+                        console.log(msg.msg);
+                        
+                        // Suppression de la ligne en cause
+                        $('a[name="'+id+'"]').parents('tr').hide();
+                    }); 
+                    
+                }
+               
+            });
+        
+        });
     </script> 
 
 {% endblock %}
