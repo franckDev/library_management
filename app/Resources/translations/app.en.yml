@@ -1,8 +1,9 @@
 general:
     title:
         tab: 'Welcome !'
-        list_book: 'Books list'
+        list_book: 'Books list of '
         create_book: 'Creating a book'
+        edit_book: 'Editing a book'
         list_user: 'Users list'
         create_user: 'Creating a new user'
         edit_user: 'Editing user information'
@@ -28,6 +29,7 @@ general:
         register: 'Registration'
         save: 'Save'
         cancel: 'Cancel'
+        back: 'Back'
         new: 'New user'
         new_book: 'New book'
     footer:

@@ -1,21 +1,86 @@
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'app' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/book/style.css') }}" />
+{% endblock %}
+
 {% block body %}
-    <h1>Book edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <div class="row">
+        
+        <div class="col-xl-4 col-lg-4 offset-lg-1 col-md-4 offset-md-1 col-sm-8 offset-sm-2 col-10 offset-1">
+        
+            <h5>{{ 'general.title.edit_book'|trans }}</h5>
+            
+        	{#{{ form_start(edit_form, {'method': 'post', 'action': path('book_edit')}) }}#}
+        	{{ form_start(edit_form, {'method': 'post', 'action': path('book_edit', {'id': book.id})}) }}
+        
+        		<div class="form-group">
+        			{{ form_label(edit_form.title) }}
+        			{{ form_widget(edit_form.title, { 'attr': {'class': 'form-control'} }) }}
+        			<small class="text-danger">
+        	            {{ form_errors(edit_form.title) }}
+        	        </small> 
+        		</div>
+        
+        		<div class="form-group">
+        			{{ form_label(edit_form.author) }}
+        			{{ form_widget(edit_form.author, { 'attr': {'class': 'form-control'} }) }}
+        			<small class="text-danger">
+        				{{ form_errors(edit_form.author) }}
+        			</small>
+        		</div>
+        
+        		<div class="form-group">
+        			{{ form_label(edit_form.kind) }}
+        			{{ form_widget(edit_form.kind, { 'attr': {'class': 'form-control'} }) }}
+        			<small class="text-danger">
+        				{{ form_errors(edit_form.kind) }}
+        			</small>
+        		</div>
+        
+        		<div class="form-group">
+        			{{ form_label(edit_form.editor) }}
+        			{{ form_widget(edit_form.editor, { 'attr': {'class': 'form-control'} }) }}
+        			<small class="text-danger">
+        				{{ form_errors(edit_form.editor) }}
+        			</small>
+        		</div>
+        		
+        		<div class="form-group">
+        			{{ form_label(edit_form.shortDescription) }}
+        			{{ form_widget(edit_form.shortDescription, { 'attr': {'class': 'form-control', 'rows': '5'} }) }}
+        			<small class="text-danger">
+        				{{ form_errors(edit_form.shortDescription) }}
+        			</small>
+        		</div>
+        		
+        		<div class="form-group">
+        			{{ form_widget(edit_form.encryptName, { 'attr': {'class': 'form-control', 'style': 'display:none;'} }) }}
+        			<small class="text-danger">
+        				{{ form_errors(edit_form.encryptName) }}
+        			</small>
+        		</div>
+        
+        	    <div class="form-group">
+        	        <input type="submit" class="btn btn-primary" value="{{ 'general.button.save'|trans }}" />
+        	        <a class="btn btn-secondary" href="{{ path('users') }}">{{ 'general.button.cancel'|trans }}</a>
+        	    </div>
+        
+        	{{ form_end(edit_form) }}
+        
+        </div>
+        
+        <div class="col-xl-5 offset-xl-1 col-lg-5 col-md-5 col-sm-10 offset-sm-1 col-10 offset-1">
+            <div class="card border-dark mb-3">
+                <div class="card-header">
+                    <iframe src="{{ asset('upload/' ~ book.encryptName) }}" style="width: 100%;height: 500px;" ></iframe>
+                </div>
+            </div> 
+        </div> 
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('book_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    
 {% endblock %}

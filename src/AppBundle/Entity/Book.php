@@ -212,7 +212,8 @@ class Book
      */
     public function setEncryptName($encryptName)
     {
-        $this->encryptName = $encryptName;
+        if($encryptName != "")
+            $this->encryptName = $encryptName;
 
         return $this;
     }

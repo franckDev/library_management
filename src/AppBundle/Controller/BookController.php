@@ -16,30 +16,42 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class BookController extends Controller
 {
+
     /**
-     * Lists all book entities.
+     * 
+     * Profil administrateur => Liste des livres d'un utilisateur
      *
-     * @Route("/", name="book_index")
+     * @Route("/{user_id}", name="user_book_list")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexUserAction($user_id)
     {
+        // Role de l'utilisateur
+        $role = $this->getUser()->getRoles()[0];
+        
         $em = $this->getDoctrine()->getManager();
 
-        $books = $em->getRepository('AppBundle:Book')->findAll();
+        $user = $em->getRepository('AppBundle:User')->find($user_id);
+        
+        $username = $user->getUsername();
+        
+        $books = $user->getBooks()->ToArray();
 
         return $this->render('book/index.html.twig', array(
             'books' => $books,
+            'user_name' => $username,
+            'user_id' => $user_id,
+            'role' => $role,
         ));
     }
 
     /**
-     * Creates a new book entity.
+     * Profil administrateur création d'un nouveau livre pour un utilisateur
      *
-     * @Route("/new", name="book_new")
+     * @Route("/new/{user_id}", name="book_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $user_id)
     {
         $book = new Book();
         
@@ -50,7 +62,9 @@ class BookController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             
             // On récupère l'utilisateur
-            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            
+            $user = $em->getRepository('AppBundle:User')->find($user_id);
             
             // On récupère le fichier
             $file = $request->files->get("appbundle_book")["encryptName"];
@@ -70,66 +84,56 @@ class BookController extends Controller
             // On enregistre l'utilisateur
             $book->setUser($user);
             
-            $em = $this->getDoctrine()->getManager();
-            
             $em->persist($book);
             
             $em->flush();
-
-            return $this->redirectToRoute('users');
+            
+            // Profil pour redirection
+            $role = $this->getUser()->getRoles()[0];
+            
+            if($role == "ROLE_ADMIN")
+                return $this->redirectToRoute('user_book_list', array('user_id' => $user->getId()));
+            else
+                return $this->redirectToRoute('users');
         }
 
         return $this->render('book/new.html.twig', array(
             'book' => $book,
             'form' => $form->createView(),
+            'user_id' => $user_id,
         ));
     }
 
     /**
-     * Finds and displays a book entity.
-     *
-     * @Route("/{id}", name="book_show")
-     * @Method("GET")
-     */
-    public function showAction(Book $book)
-    {
-        $deleteForm = $this->createDeleteForm($book);
-
-        return $this->render('book/show.html.twig', array(
-            'book' => $book,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing book entity.
+     * Profil administrateur => Modification d'un livre de n'importe lequel utilisateur
+     * Profil utilisateur => Modification d'un de ses propres livres
      *
      * @Route("/{id}/edit", name="book_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Book $book)
     {
-        $deleteForm = $this->createDeleteForm($book);
-        $editForm = $this->createForm('AppBundle\Form\BookType', $book);
+        $editForm = $this->createForm('AppBundle\Form\BookType', $book, array('attr'=> array('novalidate'=>'novalidate')));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('book_edit', array('id' => $book->getId()));
+            return $this->redirectToRoute('users');
         }
 
         return $this->render('book/edit.html.twig', array(
             'book' => $book,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a book entity.
+     * Administrateur => Suppression d'un livre de n'importe lequel utilisateur
+     * Utilisateur => Suppression d'un de ses propres livres
      *
-     * @Route("book/del/{id}", name="book_delete")
+     * @Route("/del/{id}", name="book_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Book $book)
@@ -183,11 +187,11 @@ class BookController extends Controller
         // // Puis on le renvoie dans un tableau en Json
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
-
+    
     /**
-     * Creates a form to delete a book entity.
+     * Création d'un formulaire de suppression de livre
      *
-     * @param Book $book The book entity
+     * @param Book $book Entité livre
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -199,4 +203,5 @@ class BookController extends Controller
             ->getForm()
         ;
     }
+
 }

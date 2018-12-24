@@ -12,7 +12,7 @@
     
     <h5>{{ 'general.title.create_book'|trans }}</h5>
     
-	{{ form_start(form, {'method': 'post', 'action': path('book_new'), 'attr': {'class': 'book_new'}}) }}
+	{{ form_start(form, {'method': 'post', 'action': path('book_new', { 'user_id': user_id }), 'attr': {'class': 'book_new'}}) }}
 
 		<div class="form-group">
 			{{ form_label(form.title) }}
@@ -70,17 +70,4 @@
 
 </div>
 
-
-
-    {#{{ form_start(form) }}#}
-    {#    {{ form_widget(form) }}#}
-    {#    <input type="submit" value="Create" />#}
-    {#{{ form_end(form) }}#}
-
-    {#<ul>#}
-    {#    <li>#}
-    {#        <a href="{{ path('book_index') }}">Back to the list</a>#}
-    {#    </li>#}
-    {#</ul>#}
-    
 {% endblock %}

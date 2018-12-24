@@ -22,7 +22,7 @@ security:
                 # csrf_provider: form.csrf_provider
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 60 # 1 min in seconds
+                lifetime: 3600 # 60 min in seconds
                 path:   /users
 
             logout:       true

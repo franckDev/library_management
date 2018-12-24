@@ -9,8 +9,6 @@
 
 {% block body %}
 
-    <p id="message"></p>
-
     <div class="col-xl-10 offset-xl-1 col-lg-12 col-md-12 col-sm-6 col-8">
         
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -66,7 +64,7 @@
                         <td>
                             <ul>
                                 <li class="un_list">
-                                    <a id="book_user" href="{{ path('book_show', { 'id': user.id }) }}" title="Accéder à ses livres">
+                                    <a id="book_user" href="{{ path('user_book_list', { 'user_id': user.id }) }}" title="Accéder à ses livres">
                                         {% image '@AppBundle/Resources/public/images/livre.png' %}
                                             <img src="{{ asset_url }}" width="20" height="20" alt="Show"/>
                                         {% endimage %}
