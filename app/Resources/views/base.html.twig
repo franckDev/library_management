@@ -22,7 +22,7 @@
     </head>
     <body>
         
-        <p id="message"></p>
+        <!-- <p id="message"></p> -->
         
         {% block body %}{% endblock %}
         
@@ -46,13 +46,13 @@
         {# Controle de dimension pour le responsive#}
         <script type="text/javascript">
  
-             $(window).resize(function(){
+            //  $(window).resize(function(){
                  
-                var width = $(window).width();
+            //     var width = $(window).width();
                  
-                $('#message').html(width + ' px de large');
+            //     $('#message').html(width + ' px de large');
          
-            });
+            // });
         </script>
 
         {% block javascripts %}{% endblock %} 
