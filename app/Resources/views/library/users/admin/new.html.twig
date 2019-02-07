@@ -9,7 +9,7 @@
 {% block body %}
     
 <div id="form-login" class="col-xl-4 offset-xl-4 col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1">
-    
+
     <h5>{{ 'general.title.create_user'|trans }}</h5>
     
 	{{ form_start(form, {'method': 'post', 'action': path('user_new'), 'attr': {'class': 'user_new'}}) }}
@@ -65,4 +65,103 @@
 
 {% endblock %}
 
+{% block javascripts %}
 
+    <script type="text/javascript">
+
+    	// Validation du formulaire (User)
+        $('#appbundle_user_username').blur(function(event) {
+            
+            // Nom d'utilisateur 
+            var login = $(this).val();
+
+            if(login == "")
+            	return;
+
+            var urlT = '{{ path("user_login", { 'login': 'loginE'}) }}';
+
+            urlT = urlT.replace("loginE", login);
+
+            $.ajax({
+                
+                url: urlT,  // On renseigne l'url TWIG
+                method: "POST",
+                data: {login: login} // On passe le login dans la requête
+                
+            }).done(function(msg){
+
+            	var retour = msg.msg;
+
+            	console.log(retour);
+
+                if(retour == 1){
+
+                	console.log(retour);
+
+                	return;
+
+                }else{
+
+                	// On bloque le comportement du bouton
+            		event.preventDefault();
+
+            		// On vide le champs
+            		$("#appbundle_user_username").val('');
+
+            		// Message d'erreur
+            		alert("Ce nom d'utilisateur existe déjà !");
+                }
+            }); 
+           
+        });
+
+        // Validation du formulaire (Mail)
+        $('#appbundle_user_email').blur(function(event) {
+ 
+            // Adresse mail 
+            var mail = $(this).val();
+
+            if(mail == "")
+            	return;
+
+            var urlT = '{{ path("user_email", { 'mail': 'mailE'}) }}';
+
+            urlT = urlT.replace("mailE", mail);
+
+            $.ajax({
+                
+                url: urlT,  // On renseigne l'url TWIG
+                method: "POST",
+                data: {email: mail} // On passe le mail dans la requête
+                
+            }).done(function(msg){
+
+            	var retour = msg.msg;
+
+            	console.log(retour);
+
+                if(retour == 1){
+
+                	console.log(retour);
+
+                	return;
+
+                }else{
+
+                	// On bloque le comportement du bouton
+            		event.preventDefault();
+
+            		// On vide le champs
+            		$("#appbundle_user_email").val('');
+
+            		// Message d'erreur
+            		alert("Cette adresse mail existe déjà !");
+                }
+            }); 
+           
+        });
+        
+    
+    </script> 
+
+{% endblock %}

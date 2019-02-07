@@ -120,7 +120,8 @@ class BookController extends Controller
             
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('users');
+            return $this->redirectToRoute('user_book_list', array('user_id' => $book->getUser()->getId()));
+            
         }
 
         return $this->render('book/edit.html.twig', array(

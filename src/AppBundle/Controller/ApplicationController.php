@@ -227,6 +227,84 @@ class ApplicationController extends Controller
         // Puis on le renvoie dans un tableau en Json
         return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
     }
+
+    /**
+     * Profil administrateur ou utilisateur (Ajax)
+     * 
+     * @Route("/controleL/{login}", name="user_login")
+     * @Method("POST")
+     */
+    public function controleLoginAction(Request $request)
+    {
+        // Si on reçoit une requête Ajax
+        if($request->isXMLHttpRequest())
+        {
+            // On récupère le login de l'utilisateur à controler
+            $login = $request->get('login');
+            
+            if($login != "")
+            {
+                $em = $this->getDoctrine()->getManager();
+                
+                // On vérifie l'existence du login
+                $user = $em->getRepository('AppBundle:User')->findOneBy(['username' => $login]);
+
+                if(count($user) > 0)
+                    $message = 0;
+                else
+                    $message = 1;
+
+            }else{
+                
+                $message = "Vous devez saisir un nom d'utilisateur !";
+                
+            }
+
+        }
+
+        // Puis on le renvoie dans un tableau en Json
+        return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
+
+    }
+
+    /**
+     * Profil administrateur ou utilisateur (Ajax)
+     * 
+     * @Route("/controleM/{mail}", name="user_email")
+     * @Method("POST")
+     */
+    public function controleMailAction(Request $request)
+    {
+        // Si on reçoit une requête Ajax
+        if($request->isXMLHttpRequest())
+        {
+            // On récupère le mail de l'utilisateur à controler
+            $mail = $request->get('email');
+            
+            if($mail != "")
+            {
+                $em = $this->getDoctrine()->getManager();
+                
+                // On vérifie l'existence de l'adresse mail
+                $user = $em->getRepository('AppBundle:User')->findOneBy(['email' => $mail]);
+
+                if(count($user) > 0)
+                    $message = 0;
+                else
+                    $message = 1;
+
+            }else{
+                
+                $message = "Vous devez saisir une adresse mail !";
+                
+            }
+
+        }
+
+        // Puis on le renvoie dans un tableau en Json
+        return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
+
+    }
     
     
 }

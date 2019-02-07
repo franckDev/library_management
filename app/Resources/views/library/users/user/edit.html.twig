@@ -12,7 +12,7 @@
         
         <h5>{{ 'general.title.edit_user'|trans }}</h5>
         
-    	{{ form_start(edit_form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    	{{ form_start(edit_form, {'method': 'post', 'action': path('user_edit', {'id': user.id}), 'attr': {'class': 'user_edit'}}) }}
     
     		<div class="form-group">
     			{{ form_label(edit_form.username) }}
